@@ -1,11 +1,10 @@
-﻿namespace Student_Loans_eBonder_API.Tests
+namespace Student_Loans_eBonder_API.Tests;
+
+public class UnitTest1
 {
-	public class UnitTest1
+	[Fact]
+	public void BinaryAddition_WhenPositiveNumbersAreGiven_ShouldReturnSum()
 	{
-		[Fact]
-		public void BinaryAddition_WhenPositiveNumbersAreGiven_ShouldReturnSum()
-		{
-			Assert.Equal(4, 2 + 2);
-		}
+		Assert.Equal(4, 2 + 2);
 	}
 }
