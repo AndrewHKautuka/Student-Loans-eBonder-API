@@ -3,7 +3,7 @@
 	public class UnitTest1
 	{
 		[Fact]
-		public void Test1()
+		public void BinaryAddition_WhenPositiveNumbersAreGiven_ShouldReturnSum()
 		{
 			Assert.Equal(4, 2 + 2);
 		}
