@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RuleSet Name="Custom Ruleset" ToolsVersion="16.0">
   <Rules AnalyzerId="Microsoft.CodeAnalysis.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.NetAnalyzers">
+    <Rule Id="CA1707" Action="None" />
+    <Rule Id="CA1848" Action="Info" />
   </Rules>
 </RuleSet>
