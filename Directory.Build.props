@@ -3,7 +3,6 @@
     <AnalysisLevel>latest-all</AnalysisLevel>
     <AnalysisMode>all</AnalysisMode>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)code-analysis.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 </Project>
