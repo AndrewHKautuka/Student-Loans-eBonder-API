@@ -1,0 +1,41 @@
+name: Main CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DOTNET_VERSION: '9.0.x'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore Student_Loans_eBonder.sln
+
+    - name: Lint code
+      run: dotnet format analyzers
+
+    - name: Format code style
+      run: dotnet format style
+
+    - name: Format code whitespace
+      run: dotnet format whitespace
+
+    - name: Build solution
+      run: dotnet build Student_Loans_eBonder.sln --configuration Release --no-restore
+
+    - name: Test solution
+      run: dotnet test --no-build --logger trx --results-directory TestResults/
