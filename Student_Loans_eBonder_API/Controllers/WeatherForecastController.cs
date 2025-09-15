@@ -4,7 +4,7 @@ namespace Student_Loans_eBonder_API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+internal class WeatherForecastController : ControllerBase
 {
 	private static readonly string[] Summaries = new[]
 	{

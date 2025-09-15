@@ -1,6 +1,6 @@
 namespace Student_Loans_eBonder_API;
 
-public class WeatherForecast
+internal class WeatherForecast
 {
 	public DateOnly Date { get; set; }
 
