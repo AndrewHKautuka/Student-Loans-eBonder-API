@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Tests Project Ruleset" ToolsVersion="16.0">
+  <Include Path="..\code-analysis.ruleset" Action="Default" />
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.NetAnalyzers">
+    <Rule Id="CA1515" Action="None" />
+  </Rules>
+</RuleSet>
