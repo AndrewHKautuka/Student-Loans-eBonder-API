@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Student_Loans_eBonder_API.Auth.Types.Models;
 using Student_Loans_eBonder_API.Common.Types.Models;
+using Student_Loans_eBonder_API.Profile.Types.Models;
 
 namespace Student_Loans_eBonder_API;
 
@@ -43,4 +44,7 @@ internal class ApplicationDBContext : IdentityDbContext<User, Role, string, User
 		builder.Entity<RoleClaim>().ToTable("role_claim");
 		builder.Entity<UserToken>().ToTable("user_token");
 	}
+
+	public DbSet<Name> Names { get; set; }
+	public DbSet<NameComponent> NameComponents { get; set; }
 }
