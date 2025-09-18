@@ -1,6 +1,9 @@
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+
+using Student_Loans_eBonder_API.Auth.Types.Models;
 
 namespace Student_Loans_eBonder_API;
 
@@ -15,9 +18,14 @@ internal static class Program
 		// Add services to the container.
 
 		builder.Services.AddControllers();
+		builder.Services.AddAuthorization();
 		// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 		builder.Services.AddOpenApi();
 
+		builder.Services.AddIdentity<User, Role>(options =>
+		{
+			options.User.RequireUniqueEmail = true;
+		}).AddRoles<Role>().AddEntityFrameworkStores<ApplicationDBContext>().AddDefaultTokenProviders();
 		builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseNpgsql(configuration.GetConnectionString("APIDatabase")).UseSnakeCaseNamingConvention());
 
 		var app = builder.Build();
