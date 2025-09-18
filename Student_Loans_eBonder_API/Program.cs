@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 using Student_Loans_eBonder_API.Auth.Types.Models;
+using Student_Loans_eBonder_API.Common.Extensions;
 
 namespace Student_Loans_eBonder_API;
 
@@ -26,7 +27,7 @@ internal static class Program
 		{
 			options.User.RequireUniqueEmail = true;
 		}).AddRoles<Role>().AddEntityFrameworkStores<ApplicationDBContext>().AddDefaultTokenProviders();
-		builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseNpgsql(configuration.GetConnectionString("APIDatabase")).UseSnakeCaseNamingConvention());
+		builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseNpgsql(configuration.GetConnectionString("APIDatabase"), options => options.MapDatabaseEnums()).UseSnakeCaseNamingConvention());
 
 		var app = builder.Build();
 
