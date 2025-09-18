@@ -2,6 +2,7 @@
 <RuleSet Name="Migrations Ruleset" ToolsVersion="16.0">
   <Include Path="$(MSBuildProjectDirectory)\code-analysis.ruleset" Action="Default" />
   <Rules AnalyzerId="Microsoft.CodeAnalysis.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.NetAnalyzers">
+    <Rule Id="CA1062" Action="None" />
     <Rule Id="CA1515" Action="None" />
     <Rule Id="S1186" Action="None" />
   </Rules>
