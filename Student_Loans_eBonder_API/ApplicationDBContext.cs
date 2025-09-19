@@ -47,5 +47,6 @@ internal class ApplicationDBContext : IdentityDbContext<User, Role, string, User
 
 	public DbSet<Name> Names { get; set; }
 	public DbSet<NameComponent> NameComponents { get; set; }
+	public DbSet<Student.Types.Models.Student> Students { get; set; }
 	public DbSet<UserProfile> UserProfiles { get; set; }
 }
