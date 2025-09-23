@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using Student_Loans_eBonder_API.Auth.Types.Models;
+using Student_Loans_eBonder_API.Common;
 using Student_Loans_eBonder_API.Common.Extensions;
 
 namespace Student_Loans_eBonder_API;
@@ -15,6 +16,8 @@ internal static class Program
 		var configuration = builder.Configuration;
 
 		// Add services to the container.
+
+		MapsterConfig.SetupMapsterAdapterConfig();
 
 		builder.Services.AddControllers();
 		builder.Services.AddAuthorization();
