@@ -2,6 +2,7 @@ using Mapster;
 
 using Microsoft.AspNetCore.Identity;
 
+using Student_Loans_eBonder_API.Auth.Types.Commands;
 using Student_Loans_eBonder_API.Auth.Types.Models;
 using Student_Loans_eBonder_API.Auth.Types.Requests;
 

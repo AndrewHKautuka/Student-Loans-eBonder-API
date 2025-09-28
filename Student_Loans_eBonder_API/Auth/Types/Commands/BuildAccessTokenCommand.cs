@@ -1,4 +1,4 @@
-namespace Student_Loans_eBonder_API.Auth.Types.Requests;
+namespace Student_Loans_eBonder_API.Auth.Types.Commands;
 
 internal class BuildAccessTokenCommand
 {

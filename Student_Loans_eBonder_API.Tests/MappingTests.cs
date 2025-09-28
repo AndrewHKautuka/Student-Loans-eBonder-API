@@ -1,6 +1,7 @@
 
 using Mapster;
 
+using Student_Loans_eBonder_API.Auth.Types.Commands;
 using Student_Loans_eBonder_API.Auth.Types.Models;
 using Student_Loans_eBonder_API.Auth.Types.Requests;
 using Student_Loans_eBonder_API.Common;
