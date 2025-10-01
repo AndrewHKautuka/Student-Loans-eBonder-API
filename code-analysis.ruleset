@@ -3,5 +3,6 @@
   <Rules AnalyzerId="Microsoft.CodeAnalysis.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.NetAnalyzers">
     <Rule Id="CA1707" Action="None" />
     <Rule Id="CA1848" Action="Info" />
+    <Rule Id="CA1515" Action="None" />
   </Rules>
 </RuleSet>
