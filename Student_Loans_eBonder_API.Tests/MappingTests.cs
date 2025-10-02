@@ -1,4 +1,3 @@
-
 using Mapster;
 
 using Student_Loans_eBonder_API.Auth.Types.Commands;
@@ -6,11 +5,9 @@ using Student_Loans_eBonder_API.Auth.Types.Models;
 using Student_Loans_eBonder_API.Auth.Types.Requests;
 using Student_Loans_eBonder_API.Common;
 
-using Xunit.Abstractions;
-
 namespace Student_Loans_eBonder_API.Tests;
 
-public class MappingTests(ITestOutputHelper output) : IAsyncLifetime
+public class MappingTests() : IAsyncLifetime
 {
 	public Task InitializeAsync()
 	{
