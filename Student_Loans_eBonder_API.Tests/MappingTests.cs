@@ -12,12 +12,16 @@ namespace Student_Loans_eBonder_API.Tests;
 
 public class MappingTests(ITestOutputHelper output) : IAsyncLifetime
 {
-	public async Task InitializeAsync()
+	public Task InitializeAsync()
 	{
 		MapsterConfig.SetupMapsterAdapterConfig();
+		return Task.CompletedTask;
 	}
 
-	public async Task DisposeAsync() { }
+	public Task DisposeAsync()
+	{
+		return Task.CompletedTask;
+	}
 
 	[Fact]
 	public void MapsterMapping_WhenMappingRegisterStudentCommandToRegisterUserCommand_ShouldCreateValidRegisterUserCommand()
