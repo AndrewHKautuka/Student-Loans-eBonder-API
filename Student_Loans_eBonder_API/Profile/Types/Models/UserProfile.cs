@@ -6,7 +6,7 @@ using Student_Loans_eBonder_API.Common.Types.Models;
 
 namespace Student_Loans_eBonder_API.Profile.Types.Models;
 
-internal class UserProfile : ITimestampEntity
+public class UserProfile : ITimestampEntity
 {
 	[Key]
 	[ForeignKey(nameof(User))]

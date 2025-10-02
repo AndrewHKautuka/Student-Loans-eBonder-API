@@ -8,7 +8,7 @@ using Student_Loans_eBonder_API.Common.Types.Models;
 namespace Student_Loans_eBonder_API.Profile.Types.Models;
 
 [PrimaryKey(nameof(NameId), nameof(PositionOrder))]
-internal class NameComponent : ITimestampEntity
+public class NameComponent : ITimestampEntity
 {
 	public long NameId { get; set; }
 	public required Name Name { get; set; }

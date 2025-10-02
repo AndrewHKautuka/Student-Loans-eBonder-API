@@ -4,7 +4,7 @@ using Student_Loans_eBonder_API.Common.Types.Models;
 
 namespace Student_Loans_eBonder_API.Profile.Types.Models;
 
-internal class Name : ITimestampEntity
+public class Name : ITimestampEntity
 {
 	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public long Id { get; set; }

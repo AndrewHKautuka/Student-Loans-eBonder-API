@@ -8,7 +8,7 @@ using Student_Loans_eBonder_API.Common.Extensions;
 
 namespace Student_Loans_eBonder_API;
 
-internal static class Program
+public static class Program
 {
 	public static void Main(string[] args)
 	{

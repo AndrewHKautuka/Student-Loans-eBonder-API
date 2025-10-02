@@ -6,7 +6,7 @@ using Student_Loans_eBonder_API.Common.Types.Models;
 
 namespace Student_Loans_eBonder_API.Auth.Types.Models;
 
-internal class Role : IdentityRole, ITimestampEntity
+public class Role : IdentityRole, ITimestampEntity
 {
 	[Required]
 	public DateTime CreatedAt { get; set; }

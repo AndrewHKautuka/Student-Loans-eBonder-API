@@ -5,7 +5,7 @@ using Student_Loans_eBonder_API.Auth.Types.Models;
 
 namespace Student_Loans_eBonder_API.Common;
 
-internal static class MapsterConfig
+public static class MapsterConfig
 {
 	public static void SetupMapsterAdapterConfig()
 	{

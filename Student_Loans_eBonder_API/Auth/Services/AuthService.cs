@@ -8,7 +8,7 @@ using Student_Loans_eBonder_API.Auth.Types.Requests;
 
 namespace Student_Loans_eBonder_API.Auth.Services;
 
-internal partial class AuthService
+public partial class AuthService
 {
 	private readonly ILogger<AuthService> _logger;
 	private readonly UserManager<User> _userManager;

@@ -5,7 +5,7 @@ using Student_Loans_eBonder_API.Student.Types.Models;
 
 namespace Student_Loans_eBonder_API.Common.Extensions;
 
-internal static class NpgsqlDbContextOptionsBuilderExtensions
+public static class NpgsqlDbContextOptionsBuilderExtensions
 {
 	public static NpgsqlDbContextOptionsBuilder MapDatabaseEnums(this NpgsqlDbContextOptionsBuilder options)
 	{

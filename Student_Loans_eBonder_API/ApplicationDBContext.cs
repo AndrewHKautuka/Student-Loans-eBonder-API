@@ -9,7 +9,7 @@ using Student_Loans_eBonder_API.Profile.Types.Models;
 
 namespace Student_Loans_eBonder_API;
 
-internal class ApplicationDBContext : IdentityDbContext<User, Role, string, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
+public class ApplicationDBContext : IdentityDbContext<User, Role, string, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
 {
 	public ApplicationDBContext([NotNull] DbContextOptions options) : base(options)
 	{

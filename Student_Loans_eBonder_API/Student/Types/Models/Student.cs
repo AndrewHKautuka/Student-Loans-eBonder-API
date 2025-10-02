@@ -6,7 +6,7 @@ using Student_Loans_eBonder_API.Common.Types.Models;
 namespace Student_Loans_eBonder_API.Student.Types.Models;
 
 [Index(nameof(UserId), IsUnique = true)]
-internal class Student : ITimestampEntity
+public class Student : ITimestampEntity
 {
 	public Guid Id { get; set; }
 	public required string UserId { get; set; }

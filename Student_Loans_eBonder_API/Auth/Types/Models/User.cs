@@ -6,7 +6,7 @@ using Student_Loans_eBonder_API.Common.Types.Models;
 
 namespace Student_Loans_eBonder_API.Auth.Types.Models;
 
-internal class User : IdentityUser, ITimestampEntity
+public class User : IdentityUser, ITimestampEntity
 {
 	public DateTime? EmailConfirmedAt { get; set; }
 	public DateTime? PasswordChangedAt { get; set; }

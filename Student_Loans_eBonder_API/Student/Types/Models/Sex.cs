@@ -1,6 +1,6 @@
 namespace Student_Loans_eBonder_API.Student.Types.Models;
 
-internal enum Sex
+public enum Sex
 {
 	MALE, FEMALE
 }

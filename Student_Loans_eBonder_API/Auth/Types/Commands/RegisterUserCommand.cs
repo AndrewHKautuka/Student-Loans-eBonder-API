@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Student_Loans_eBonder_API.Auth.Types.Commands;
 
-internal class RegisterUserCommand
+public class RegisterUserCommand
 {
 	[EmailAddress]
 	public required string Email { get; set; }

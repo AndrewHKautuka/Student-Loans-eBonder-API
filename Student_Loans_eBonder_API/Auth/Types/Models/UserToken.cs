@@ -6,7 +6,7 @@ using Student_Loans_eBonder_API.Common.Types.Models;
 
 namespace Student_Loans_eBonder_API.Auth.Types.Models;
 
-internal class UserToken : IdentityUserToken<string>, ITimestampEntity
+public class UserToken : IdentityUserToken<string>, ITimestampEntity
 {
 	[Required]
 	public DateTime CreatedAt { get; set; }
