@@ -19,6 +19,6 @@
 ## or put your custom commands -------------------
 #echo 'Husky.Net is awesome!'
 
-dotnet format analyzers --severity error --verify-no-changes
-dotnet format style
-dotnet format whitespace
+dotnet format analyzers --no-restore --severity error --verify-no-changes
+dotnet format style --no-restore
+dotnet format whitespace --no-restore
