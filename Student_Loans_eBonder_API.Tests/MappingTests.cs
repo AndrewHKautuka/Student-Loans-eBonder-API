@@ -3,6 +3,7 @@ using Mapster;
 using Student_Loans_eBonder_API.Auth.Types.Commands;
 using Student_Loans_eBonder_API.Auth.Types.Models;
 using Student_Loans_eBonder_API.Auth.Types.Requests;
+using Student_Loans_eBonder_API.Auth.Types.Responses;
 using Student_Loans_eBonder_API.Common;
 
 namespace Student_Loans_eBonder_API.Tests;
@@ -39,5 +40,18 @@ public class MappingTests() : IAsyncLifetime
 		Assert.Equal("test@example.com", dest.User.Email);
 		Assert.Equal("test@example.com", dest.User.UserName);
 		Assert.Equal("1234!@#$", dest.Password);
+	}
+
+	[Fact]
+	public void MapsterMapping_WhenMappingBuildTokenResponseToRegisterUserResponse_ShouldCreateValidRegisterUserResponse()
+	{
+		var token = "ThisIsAnExampleTokenForTestingPurposesOnly123456789";
+		var expiryDate = new DateTime(2030, 1, 1, 12, 30, 15, DateTimeKind.Utc);
+
+		var source = new BuildAccessTokenResponse { Token = token, Expires = expiryDate };
+		var dest = source.Adapt<RegisterUserResponse>();
+
+		Assert.Equal(token, dest.Token);
+		Assert.Equal(expiryDate, dest.Expires);
 	}
 }
