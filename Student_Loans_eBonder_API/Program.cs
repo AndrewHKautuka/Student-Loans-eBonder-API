@@ -21,6 +21,7 @@ public static class Program
 		MapsterConfig.SetupMapsterAdapterConfig();
 
 		builder.Services.AddScoped<AuthService>();
+		builder.Services.AddScoped<TokenService>();
 
 		builder.Services.AddControllers();
 		builder.Services.AddAuthorization();
