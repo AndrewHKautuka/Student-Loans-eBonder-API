@@ -19,7 +19,7 @@ public partial class AuthService
 		_userManager = userManager;
 	}
 
-	public async Task<IdentityResult> Register(RegisterUserCommand registerUserCommand)
+	public async Task<(IdentityResult, string? UserId)> Register(RegisterUserCommand registerUserCommand)
 	{
 		LogRegisterAttemptMessage(_logger, registerUserCommand.Email);
 
@@ -28,12 +28,21 @@ public partial class AuthService
 		var (user, password) = registerUserCommand.Adapt<(User User, string Password)>();
 
 		var result = await _userManager.CreateAsync(user, password).ConfigureAwait(false);
-		LogRegisterStatusMessage(_logger, result.Succeeded ? "Successfully registered" : "Failed to register", registerUserCommand.Email);
 
-		return result;
+		if (result.Succeeded)
+		{
+			LogRegisterSuccessfulMessage(_logger, registerUserCommand.Email);
+			return (result, user.Id);
+		}
+		else
+		{
+			LogRegisterFailedMessage(_logger, registerUserCommand.Email);
+			return (result, null);
+		}
+
 	}
 
-	public async Task<IdentityResult> RegisterStudent(RegisterStudentRequest registerStudentRequest)
+	public async Task<(IdentityResult, string? UserId)> RegisterStudent(RegisterStudentRequest registerStudentRequest)
 	{
 		return await Register(registerStudentRequest.Adapt<RegisterUserCommand>()).ConfigureAwait(true);
 	}
@@ -41,6 +50,9 @@ public partial class AuthService
 	[LoggerMessage(Level = LogLevel.Information, Message = "Attempt to register {Email}")]
 	static partial void LogRegisterAttemptMessage(ILogger logger, string email);
 
-	[LoggerMessage(Level = LogLevel.Information, Message = "{RegistrationStatus} new User with email {Email}")]
-	static partial void LogRegisterStatusMessage(ILogger logger, string registrationStatus, string email);
+	[LoggerMessage(Level = LogLevel.Information, Message = "Successfully registered new User with email {Email}")]
+	static partial void LogRegisterSuccessfulMessage(ILogger logger, string email);
+
+	[LoggerMessage(Level = LogLevel.Information, Message = "Failed to register new User with email {Email}")]
+	static partial void LogRegisterFailedMessage(ILogger logger, string email);
 }
