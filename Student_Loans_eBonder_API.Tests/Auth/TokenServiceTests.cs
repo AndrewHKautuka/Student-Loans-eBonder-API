@@ -120,7 +120,7 @@ public class TokenServiceTests : IAsyncLifetime
 		for (int i = 0; i < 5; i++)
 		{
 			results.Add(_tokenService.BuildAccessToken(command));
-			await Task.Delay(1000);
+			await Task.Delay(1500);
 		}
 
 		// Assert
