@@ -11,5 +11,5 @@ public class Name : ITimestampEntity
 	public string? PreferredShortName { get; set; }
 	public DateTime CreatedAt { get; set; }
 	public DateTime UpdatedAt { get; set; }
-	public required ICollection<NameComponent> Components { get; set; }
+	public ICollection<NameComponent> Components { get; } = [];
 }
