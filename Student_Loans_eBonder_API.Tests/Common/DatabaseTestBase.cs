@@ -17,7 +17,7 @@ namespace Student_Loans_eBonder_API.Tests.Common;
 /// </summary>
 public abstract class DatabaseTestBase : IAsyncLifetime
 {
-	private ApplicationDBContext _testDBContext;
+	private ApplicationDBContext _testDBContext = null!;
 	protected ApplicationDBContext TestDbContext
 	{
 		get => _testDBContext;
@@ -28,7 +28,7 @@ public abstract class DatabaseTestBase : IAsyncLifetime
 		}
 	}
 	protected static Mock<ILogger<T>> MockLogger<T>() where T : class => new Mock<ILogger<T>>();
-	private UserStore<User, Role, ApplicationDBContext, string> _userStore;
+	private UserStore<User, Role, ApplicationDBContext, string> _userStore = null!;
 	protected UserStore<User, Role, ApplicationDBContext, string> UserStore
 	{
 		get => _userStore;
@@ -38,7 +38,7 @@ public abstract class DatabaseTestBase : IAsyncLifetime
 			UserManager = CreateUserManager(UserStore);
 		}
 	}
-	protected UserManager<User> UserManager { get; private set; }
+	protected UserManager<User> UserManager { get; private set; } = null!;
 
 	/// <summary>
 	/// Gets a unique database name for this test instance.
