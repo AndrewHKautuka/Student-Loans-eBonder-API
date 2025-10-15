@@ -38,4 +38,4 @@ jobs:
       run: dotnet build Student_Loans_eBonder.sln --configuration Release --no-restore
 
     - name: Test solution
-      run: dotnet test --no-build --logger trx --results-directory TestResults/
+      run: dotnet test --configuration Release --no-build --logger trx --results-directory TestResults/
