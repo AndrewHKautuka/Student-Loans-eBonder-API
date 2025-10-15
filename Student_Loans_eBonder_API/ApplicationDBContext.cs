@@ -19,19 +19,22 @@ public class ApplicationDBContext : IdentityDbContext<User, Role, string, UserCl
 	{
 		ArgumentNullException.ThrowIfNull(builder);
 
-		foreach (var entityType in builder.Model.GetEntityTypes()
-				 .Where(e => typeof(ITimestampEntity).IsAssignableFrom(e.ClrType)))
-		{
-			builder.Entity(entityType.ClrType)
-				.Property(nameof(ITimestampEntity.CreatedAt))
-				.HasDefaultValueSql("CURRENT_TIMESTAMP")
-				.ValueGeneratedOnAdd();
+		builder.Model.GetEntityTypes()
+			.Where(e => typeof(ITimestampEntity).IsAssignableFrom(e.ClrType))
+			.Select(entityType => entityType.ClrType)
+			.ToList()
+			.ForEach(clrType =>
+			{
+				builder.Entity(clrType)
+					.Property(nameof(ITimestampEntity.CreatedAt))
+					.HasDefaultValueSql("CURRENT_TIMESTAMP")
+					.ValueGeneratedOnAdd();
 
-			builder.Entity(entityType.ClrType)
-				.Property(nameof(ITimestampEntity.UpdatedAt))
-				.HasDefaultValueSql("CURRENT_TIMESTAMP")
-				.ValueGeneratedOnAddOrUpdate();
-		}
+				builder.Entity(clrType)
+					.Property(nameof(ITimestampEntity.UpdatedAt))
+					.HasDefaultValueSql("CURRENT_TIMESTAMP")
+					.ValueGeneratedOnAddOrUpdate();
+			});
 
 		base.OnModelCreating(builder);
 
