@@ -22,6 +22,8 @@ public partial class TokenService
 
 	public BuildAccessTokenResponse BuildAccessToken(BuildAccessTokenCommand buildAccessTokenCommand)
 	{
+		ArgumentNullException.ThrowIfNull(buildAccessTokenCommand);
+
 		LogBuildTokenAttemptMessage(_logger, buildAccessTokenCommand.UserId);
 
 		var claims = new List<Claim>()

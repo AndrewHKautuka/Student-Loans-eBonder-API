@@ -17,6 +17,8 @@ public class ApplicationDBContext : IdentityDbContext<User, Role, string, UserCl
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
+		ArgumentNullException.ThrowIfNull(builder);
+
 		foreach (var entityType in builder.Model.GetEntityTypes()
 				 .Where(e => typeof(ITimestampEntity).IsAssignableFrom(e.ClrType)))
 		{

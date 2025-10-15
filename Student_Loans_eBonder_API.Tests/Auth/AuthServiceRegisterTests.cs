@@ -124,9 +124,9 @@ public class AuthServiceTests : DatabaseTestBase
 	}
 
 	[Fact]
-	public async Task AuthService_WhenRegisterCalledWithNullCommand_ShouldThrowNullReferenceException()
+	public async Task AuthService_WhenRegisterCalledWithNullCommand_ShouldThrowArgumentNullException()
 	{
 		// Act & Assert
-		await Assert.ThrowsAsync<NullReferenceException>(() => _authService.Register(null!));
+		await Assert.ThrowsAsync<ArgumentNullException>(() => _authService.Register(null!));
 	}
 }

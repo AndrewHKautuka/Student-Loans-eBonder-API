@@ -59,6 +59,7 @@ public static class TestDatabaseHelper
 	/// <param name="context">The database context to initialize.</param>
 	public static async Task EnsureDatabaseCreatedAsync(ApplicationDBContext context)
 	{
+		ArgumentNullException.ThrowIfNull(context);
 		await context.Database.EnsureCreatedAsync().ConfigureAwait(true);
 	}
 
@@ -68,6 +69,7 @@ public static class TestDatabaseHelper
 	/// <param name="context">The database context to clean up.</param>
 	public static async Task CleanupDatabaseAsync(ApplicationDBContext context)
 	{
+		ArgumentNullException.ThrowIfNull(context);
 		// Remove all entities from all tables
 		context.Users.RemoveRange(context.Users);
 		context.Roles.RemoveRange(context.Roles);
@@ -90,6 +92,7 @@ public static class TestDatabaseHelper
 	/// <param name="context">The database context to dispose.</param>
 	public static void DisposeContext(ApplicationDBContext context)
 	{
+		ArgumentNullException.ThrowIfNull(context);
 		context.Dispose();
 	}
 }

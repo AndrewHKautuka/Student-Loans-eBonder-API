@@ -21,6 +21,8 @@ public partial class AuthService
 
 	public async Task<(IdentityResult, string? UserId)> Register(RegisterUserCommand registerUserCommand)
 	{
+		ArgumentNullException.ThrowIfNull(registerUserCommand);
+
 		LogRegisterAttemptMessage(_logger, registerUserCommand.Email);
 
 		TypeAdapterConfig.GlobalSettings.NewConfig<RegisterUserCommand, User>().Map(dest => dest.UserName, src => src.Email);
@@ -44,6 +46,7 @@ public partial class AuthService
 
 	public async Task<(IdentityResult, string? UserId)> RegisterStudent(RegisterStudentRequest registerStudentRequest)
 	{
+		ArgumentNullException.ThrowIfNull(registerStudentRequest);
 		return await Register(registerStudentRequest.Adapt<RegisterUserCommand>()).ConfigureAwait(true);
 	}
 
