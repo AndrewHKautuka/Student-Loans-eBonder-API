@@ -30,7 +30,7 @@ public static class Program
 
 		builder.Services.AddIdentity<User, Role>(options =>
 		{
-			options.User.RequireUniqueEmail = true;
+			IdentityConfig.SetIdentityOptions(options);
 		}).AddRoles<Role>().AddEntityFrameworkStores<ApplicationDBContext>().AddDefaultTokenProviders();
 		builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseNpgsql(configuration.GetConnectionString("APIDatabase"), options => options.MapDatabaseEnums()).UseSnakeCaseNamingConvention());
 
