@@ -11,7 +11,7 @@ namespace Student_Loans_eBonder_API.Profile.Types.Models;
 public class NameComponent : ITimestampEntity
 {
 	public long NameId { get; set; }
-	public required Name Name { get; set; }
+	public Name Name { get; set; } = null!;
 	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	[Range(1, int.MaxValue, ErrorMessage = "The position order must be at least 1.")]
 	public short PositionOrder { get; set; }

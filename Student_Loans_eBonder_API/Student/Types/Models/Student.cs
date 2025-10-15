@@ -9,8 +9,8 @@ namespace Student_Loans_eBonder_API.Student.Types.Models;
 public class Student : ITimestampEntity
 {
 	public Guid Id { get; set; }
-	public required string UserId { get; set; }
-	public required User User { get; set; }
+	public string UserId { get; set; } = null!;
+	public User User { get; set; } = null!;
 	public string? NationalIdNumber { get; set; }
 	public string? NationalIdScanUrl { get; set; }
 	public DateOnly? DateOfBirth { get; set; }
