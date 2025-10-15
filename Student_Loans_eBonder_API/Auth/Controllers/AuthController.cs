@@ -18,7 +18,7 @@ public partial class AuthController(ILogger<AuthController> logger, AuthService 
 	public async Task<ActionResult<RegisterUserResponse>> RegisterStudent([FromBody] RegisterStudentRequest request)
 	{
 		LogRegisterStudentEndpointHitMessage(logger, JsonSerializer.Serialize(request));
-		var (result, userId) = await authService.RegisterStudent(request).ConfigureAwait(true);
+		var (result, userId) = await authService.RegisterStudent(request);
 
 		if (result.Succeeded)
 		{

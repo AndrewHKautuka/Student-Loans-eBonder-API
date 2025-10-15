@@ -60,7 +60,7 @@ public static class TestDatabaseHelper
 	public static async Task EnsureDatabaseCreatedAsync(ApplicationDBContext context)
 	{
 		ArgumentNullException.ThrowIfNull(context);
-		await context.Database.EnsureCreatedAsync().ConfigureAwait(true);
+		await context.Database.EnsureCreatedAsync();
 	}
 
 	/// <summary>
@@ -83,7 +83,7 @@ public static class TestDatabaseHelper
 		context.Students.RemoveRange(context.Students);
 		context.UserProfiles.RemoveRange(context.UserProfiles);
 
-		await context.SaveChangesAsync().ConfigureAwait(true);
+		await context.SaveChangesAsync();
 	}
 
 	/// <summary>

@@ -16,7 +16,7 @@ public class AuthServiceEdgeCaseTests : DatabaseTestBase
 
 	public override async Task InitializeAsync()
 	{
-		await base.InitializeAsync().ConfigureAwait(true);
+		await base.InitializeAsync();
 
 		_mockLogger = MockLogger<AuthService>();
 

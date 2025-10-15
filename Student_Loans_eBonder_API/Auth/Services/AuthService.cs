@@ -29,7 +29,7 @@ public partial class AuthService
 
 		var (user, password) = registerUserCommand.Adapt<(User User, string Password)>();
 
-		var result = await _userManager.CreateAsync(user, password).ConfigureAwait(false);
+		var result = await _userManager.CreateAsync(user, password);
 
 		if (result.Succeeded)
 		{
@@ -47,7 +47,7 @@ public partial class AuthService
 	public async Task<(IdentityResult, string? UserId)> RegisterStudent(RegisterStudentRequest registerStudentRequest)
 	{
 		ArgumentNullException.ThrowIfNull(registerStudentRequest);
-		return await Register(registerStudentRequest.Adapt<RegisterUserCommand>()).ConfigureAwait(true);
+		return await Register(registerStudentRequest.Adapt<RegisterUserCommand>());
 	}
 
 	[LoggerMessage(Level = LogLevel.Information, Message = "Attempt to register {Email}")]

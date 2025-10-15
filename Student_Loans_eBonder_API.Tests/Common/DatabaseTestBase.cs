@@ -55,7 +55,7 @@ public abstract class DatabaseTestBase : IAsyncLifetime
 
 		// Create test database context
 		TestDbContext = TestDatabaseHelper.CreateTestDbContext(DatabaseName);
-		await TestDatabaseHelper.EnsureDatabaseCreatedAsync(TestDbContext).ConfigureAwait(true);
+		await TestDatabaseHelper.EnsureDatabaseCreatedAsync(TestDbContext);
 	}
 
 	/// <summary>
@@ -65,7 +65,7 @@ public abstract class DatabaseTestBase : IAsyncLifetime
 	{
 		if (TestDbContext != null)
 		{
-			await TestDatabaseHelper.CleanupDatabaseAsync(TestDbContext).ConfigureAwait(true);
+			await TestDatabaseHelper.CleanupDatabaseAsync(TestDbContext);
 			TestDatabaseHelper.DisposeContext(TestDbContext);
 		}
 	}
@@ -75,7 +75,7 @@ public abstract class DatabaseTestBase : IAsyncLifetime
 	/// </summary>
 	protected async Task SaveChangesAsync()
 	{
-		await TestDbContext.SaveChangesAsync().ConfigureAwait(true);
+		await TestDbContext.SaveChangesAsync();
 	}
 
 	private static UserManager<User> CreateUserManager(IUserStore<User> store)
