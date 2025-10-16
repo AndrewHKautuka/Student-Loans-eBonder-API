@@ -9,12 +9,8 @@ using Student_Loans_eBonder_API.Profile.Types.Models;
 
 namespace Student_Loans_eBonder_API;
 
-public class ApplicationDBContext : IdentityDbContext<User, Role, string, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
+public class ApplicationDBContext([NotNull] DbContextOptions options) : IdentityDbContext<User, Role, string, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>(options)
 {
-	public ApplicationDBContext([NotNull] DbContextOptions options) : base(options)
-	{
-	}
-
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
 		ArgumentNullException.ThrowIfNull(builder);

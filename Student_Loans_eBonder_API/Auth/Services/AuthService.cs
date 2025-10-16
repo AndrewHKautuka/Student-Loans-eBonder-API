@@ -10,49 +10,38 @@ using Student_Loans_eBonder_API.Profile.Types.Commands;
 
 namespace Student_Loans_eBonder_API.Auth.Services;
 
-public partial class AuthService
+public partial class AuthService(ILogger<AuthService> logger, UserManager<User> userManager, UserProfileService userProfileService)
 {
-	private readonly ILogger<AuthService> _logger;
-	private readonly UserManager<User> _userManager;
-	private readonly UserProfileService _userProfileService;
-
-	public AuthService(ILogger<AuthService> logger, UserManager<User> userManager, UserProfileService userProfileService)
-	{
-		_logger = logger;
-		_userManager = userManager;
-		_userProfileService = userProfileService;
-	}
-
 	public async Task<(IdentityResult, string? UserId)> Register(RegisterUserCommand registerUserCommand)
 	{
 		ArgumentNullException.ThrowIfNull(registerUserCommand);
 
-		LogRegisterAttemptMessage(_logger, registerUserCommand.Email);
+		LogRegisterAttemptMessage(logger, registerUserCommand.Email);
 
 		TypeAdapterConfig.GlobalSettings.NewConfig<RegisterUserCommand, User>().Map(dest => dest.UserName, src => src.Email);
 
 		var (user, password) = registerUserCommand.Adapt<(User User, string Password)>();
 
-		var result = await _userManager.CreateAsync(user, password);
+		var result = await userManager.CreateAsync(user, password);
 
 		if (result.Succeeded)
 		{
 			var userId = user.Id;
-			var profileCreated = await _userProfileService.CreateUserProfile(new CreateUserProfileCommand { UserId = userId });
+			var profileCreated = await userProfileService.CreateUserProfile(new CreateUserProfileCommand { UserId = userId });
 
 			if (!profileCreated)
 			{
-				await _userManager.DeleteAsync(user);
-				LogRegisterFailedMessage(_logger, registerUserCommand.Email);
+				await userManager.DeleteAsync(user);
+				LogRegisterFailedMessage(logger, registerUserCommand.Email);
 				return (IdentityResult.Failed(new IdentityError() { Description = "Failed to create corresponding user profile" }), null);
 			}
 
-			LogRegisterSuccessfulMessage(_logger, registerUserCommand.Email);
+			LogRegisterSuccessfulMessage(logger, registerUserCommand.Email);
 			return (result, userId);
 		}
 		else
 		{
-			LogRegisterFailedMessage(_logger, registerUserCommand.Email);
+			LogRegisterFailedMessage(logger, registerUserCommand.Email);
 			return (result, null);
 		}
 

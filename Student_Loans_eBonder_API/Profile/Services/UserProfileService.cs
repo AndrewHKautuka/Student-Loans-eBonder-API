@@ -7,37 +7,28 @@ using Student_Loans_eBonder_API.Profile.Types.Models;
 
 namespace Student_Loans_eBonder_API.Profile.Services;
 
-public partial class UserProfileService
+public partial class UserProfileService(ILogger<UserProfileService> logger, ApplicationDBContext dBContext)
 {
-	private readonly ILogger<UserProfileService> _logger;
-	private readonly ApplicationDBContext _dBContext;
-
-	public UserProfileService(ILogger<UserProfileService> logger, ApplicationDBContext dBContext)
-	{
-		_logger = logger;
-		_dBContext = dBContext;
-	}
-
 	public async Task<bool> CreateUserProfile(CreateUserProfileCommand command)
 	{
-		LogCheckProfileExistanceMessage(_logger);
+		LogCheckProfileExistanceMessage(logger);
 
-		var existingProfile = await _dBContext.UserProfiles.FirstOrDefaultAsync(x => x.UserId == command.UserId);
+		var existingProfile = await dBContext.UserProfiles.FirstOrDefaultAsync(x => x.UserId == command.UserId);
 
 		if (existingProfile is not null)
 		{
-			LogProfileAlreadyExistMessage(_logger);
+			LogProfileAlreadyExistMessage(logger);
 			return false;
 		}
 
-		LogProfileDoesNotExistMessage(_logger);
+		LogProfileDoesNotExistMessage(logger);
 
-		LogCreateNewProfileMessage(_logger);
+		LogCreateNewProfileMessage(logger);
 		var userProfile = command.Adapt<UserProfile>();
 
-		LogCreateNewProfileMessage(_logger);
-		await _dBContext.UserProfiles.AddAsync(userProfile);
-		await _dBContext.SaveChangesAsync();
+		LogCreateNewProfileMessage(logger);
+		await dBContext.UserProfiles.AddAsync(userProfile);
+		await dBContext.SaveChangesAsync();
 
 		return true;
 	}
