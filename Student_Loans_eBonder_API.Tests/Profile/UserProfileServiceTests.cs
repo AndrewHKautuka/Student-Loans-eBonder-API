@@ -34,7 +34,7 @@ public class UserProfileServiceTests : DatabaseTestBase
 
 		// Assert
 		Assert.True(created);
-		var profile = TestDbContext.UserProfiles.SingleOrDefault(p => p.UserId == userId);
+		var profile = TestDbContext.UserProfile.SingleOrDefault(p => p.UserId == userId);
 		Assert.NotNull(profile);
 		Assert.IsType<UserProfile>(profile);
 		Assert.NotNull(profile!.Name);
@@ -45,7 +45,7 @@ public class UserProfileServiceTests : DatabaseTestBase
 	{
 		// Arrange
 		var userId = "user-with-profile";
-		TestDbContext.UserProfiles.Add(new UserProfile { UserId = userId, Name = new Name() });
+		TestDbContext.UserProfile.Add(new UserProfile { UserId = userId, Name = new Name() });
 		await SaveChangesAsync();
 
 		var command = new CreateUserProfileCommand { UserId = userId };
@@ -55,7 +55,7 @@ public class UserProfileServiceTests : DatabaseTestBase
 
 		// Assert
 		Assert.False(created);
-		var count = TestDbContext.UserProfiles.Count(p => p.UserId == userId);
+		var count = TestDbContext.UserProfile.Count(p => p.UserId == userId);
 		Assert.Equal(1, count);
 	}
 }

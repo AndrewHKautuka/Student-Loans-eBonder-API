@@ -13,7 +13,7 @@ public partial class UserProfileService(ILogger<UserProfileService> logger, Appl
 	{
 		LogCheckProfileExistanceMessage(logger);
 
-		var existingProfile = await dBContext.UserProfiles.FirstOrDefaultAsync(x => x.UserId == command.UserId);
+		var existingProfile = await dBContext.UserProfile.FirstOrDefaultAsync(x => x.UserId == command.UserId);
 
 		if (existingProfile is not null)
 		{
@@ -27,7 +27,7 @@ public partial class UserProfileService(ILogger<UserProfileService> logger, Appl
 		var userProfile = command.Adapt<UserProfile>();
 
 		LogCreateNewProfileMessage(logger);
-		await dBContext.UserProfiles.AddAsync(userProfile);
+		await dBContext.UserProfile.AddAsync(userProfile);
 		await dBContext.SaveChangesAsync();
 
 		return true;

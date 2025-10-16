@@ -44,8 +44,8 @@ public class ApplicationDBContext([NotNull] DbContextOptions options) : Identity
 		builder.Entity<UserToken>().ToTable("user_token");
 	}
 
-	public DbSet<Name> Names { get; set; }
-	public DbSet<NameComponent> NameComponents { get; set; }
-	public DbSet<Student.Types.Models.Student> Students { get; set; }
-	public DbSet<UserProfile> UserProfiles { get; set; }
+	public DbSet<Name> Name { get; set; }
+	public DbSet<NameComponent> NameComponent { get; set; }
+	public DbSet<Student.Types.Models.Student> Student { get; set; }
+	public DbSet<UserProfile> UserProfile { get; set; }
 }

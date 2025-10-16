@@ -78,10 +78,10 @@ public static class TestDatabaseHelper
 		context.UserLogins.RemoveRange(context.UserLogins);
 		context.RoleClaims.RemoveRange(context.RoleClaims);
 		context.UserTokens.RemoveRange(context.UserTokens);
-		context.Names.RemoveRange(context.Names);
-		context.NameComponents.RemoveRange(context.NameComponents);
-		context.Students.RemoveRange(context.Students);
-		context.UserProfiles.RemoveRange(context.UserProfiles);
+		context.Name.RemoveRange(context.Name);
+		context.NameComponent.RemoveRange(context.NameComponent);
+		context.Student.RemoveRange(context.Student);
+		context.UserProfile.RemoveRange(context.UserProfile);
 
 		await context.SaveChangesAsync();
 	}
