@@ -7,10 +7,12 @@ using Student_Loans_eBonder_API.Auth.Types.Models;
 using Student_Loans_eBonder_API.Auth.Types.Requests;
 using Student_Loans_eBonder_API.Profile.Services;
 using Student_Loans_eBonder_API.Profile.Types.Commands;
+using Student_Loans_eBonder_API.Student.Services;
+using Student_Loans_eBonder_API.Student.Types.Commands;
 
 namespace Student_Loans_eBonder_API.Auth.Services;
 
-public partial class AuthService(ILogger<AuthService> logger, UserManager<User> userManager, UserProfileService userProfileService)
+public partial class AuthService(ILogger<AuthService> logger, UserManager<User> userManager, UserProfileService userProfileService, StudentService studentService)
 {
 	public async Task<(IdentityResult, string? UserId)> Register(RegisterUserCommand registerUserCommand)
 	{
@@ -50,7 +52,22 @@ public partial class AuthService(ILogger<AuthService> logger, UserManager<User> 
 	public async Task<(IdentityResult, string? UserId)> RegisterStudent(RegisterStudentRequest registerStudentRequest)
 	{
 		ArgumentNullException.ThrowIfNull(registerStudentRequest);
-		return await Register(registerStudentRequest.Adapt<RegisterUserCommand>());
+		var (result, userId) = await Register(registerStudentRequest.Adapt<RegisterUserCommand>());
+
+		if (result.Succeeded)
+		{
+			var studentCreated = await studentService.CreateStudent(new CreateStudentCommand() { UserId = userId! });
+
+			if (!studentCreated)
+			{
+				var user = await userManager.FindByIdAsync(userId!);
+				await userManager.DeleteAsync(user!);
+				LogRegisterUnrolledMessage(logger, registerStudentRequest.Email);
+				return (IdentityResult.Failed(new IdentityError() { Description = "Failed to create corresponding student record" }), null);
+			}
+		}
+
+		return (result, userId);
 	}
 
 	[LoggerMessage(Level = LogLevel.Information, Message = "Attempt to register {Email}")]
@@ -61,4 +78,7 @@ public partial class AuthService(ILogger<AuthService> logger, UserManager<User> 
 
 	[LoggerMessage(Level = LogLevel.Information, Message = "Failed to register new User with email {Email}")]
 	static partial void LogRegisterFailedMessage(ILogger logger, string email);
+
+	[LoggerMessage(Level = LogLevel.Information, Message = "Unrolled registeration of new User with email {Email}")]
+	static partial void LogRegisterUnrolledMessage(ILogger logger, string email);
 }

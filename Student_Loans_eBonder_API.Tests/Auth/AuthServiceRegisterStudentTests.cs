@@ -5,6 +5,7 @@ using Moq;
 using Student_Loans_eBonder_API.Auth.Services;
 using Student_Loans_eBonder_API.Auth.Types.Requests;
 using Student_Loans_eBonder_API.Profile.Services;
+using Student_Loans_eBonder_API.Student.Services;
 using Student_Loans_eBonder_API.Tests.Common;
 
 namespace Student_Loans_eBonder_API.Tests.Auth;
@@ -24,12 +25,16 @@ public class AuthServiceStudentTests : DatabaseTestBase
 		_mockLogger = MockLogger<AuthService>();
 
 		var mockProfileLogger = MockLogger<UserProfileService>();
+		var mockStudentLogger = MockLogger<StudentService>();
+
 		var userProfileService = new UserProfileService(mockProfileLogger.Object, TestDbContext);
-		_authService = new AuthService(_mockLogger.Object, UserManager, userProfileService);
+		var studentService = new StudentService(mockStudentLogger.Object, TestDbContext);
+
+		_authService = new AuthService(_mockLogger.Object, UserManager, userProfileService, studentService);
 	}
 
 	[Fact]
-	public async Task AuthService_WhenRegisterStudentCalledWithValidRequest_ShouldReturnSuccessResult()
+	public async Task AuthService_WhenRegisterStudentCalledWithValidRequest_ShouldReturnSuccessResultAndCreateStudentRecord()
 	{
 		// Arrange
 		var request = new RegisterStudentRequest
@@ -44,6 +49,8 @@ public class AuthServiceStudentTests : DatabaseTestBase
 		// Assert
 		Assert.True(result.Succeeded);
 		Assert.NotNull(userId);
+		var student = TestDbContext.Student.SingleOrDefault(s => s.UserId == userId);
+		Assert.NotNull(student);
 	}
 
 	[Fact]

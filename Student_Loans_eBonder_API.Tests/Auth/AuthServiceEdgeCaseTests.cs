@@ -6,6 +6,7 @@ using Student_Loans_eBonder_API.Auth.Services;
 using Student_Loans_eBonder_API.Auth.Types.Commands;
 using Student_Loans_eBonder_API.Auth.Types.Requests;
 using Student_Loans_eBonder_API.Profile.Services;
+using Student_Loans_eBonder_API.Student.Services;
 using Student_Loans_eBonder_API.Tests.Common;
 
 namespace Student_Loans_eBonder_API.Tests.Auth;
@@ -22,8 +23,12 @@ public class AuthServiceEdgeCaseTests : DatabaseTestBase
 		_mockLogger = MockLogger<AuthService>();
 
 		var mockProfileLogger = MockLogger<UserProfileService>();
+		var mockStudentLogger = MockLogger<StudentService>();
+
 		var userProfileService = new UserProfileService(mockProfileLogger.Object, TestDbContext);
-		_authService = new AuthService(_mockLogger.Object, UserManager, userProfileService);
+		var studentService = new StudentService(mockStudentLogger.Object, TestDbContext);
+
+		_authService = new AuthService(_mockLogger.Object, UserManager, userProfileService, studentService);
 	}
 
 	[Fact]
