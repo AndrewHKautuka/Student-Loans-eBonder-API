@@ -5,6 +5,8 @@ using Student_Loans_eBonder_API.Auth.Types.Models;
 using Student_Loans_eBonder_API.Auth.Types.Requests;
 using Student_Loans_eBonder_API.Auth.Types.Responses;
 using Student_Loans_eBonder_API.Common;
+using Student_Loans_eBonder_API.Profile.Types.Commands;
+using Student_Loans_eBonder_API.Profile.Types.Models;
 
 namespace Student_Loans_eBonder_API.Tests;
 
@@ -53,5 +55,26 @@ public class MappingTests() : IAsyncLifetime
 
 		Assert.Equal(token, dest.Token);
 		Assert.Equal(expiryDate, dest.Expires);
+	}
+
+	[Fact]
+	public void MapsterMapping_WhenMappingCreateUserProfileCommandToUserProfile_ShouldCreateValidUserProfile()
+	{
+		// Arrange
+		var userId = "test-user-id-123";
+		var source = new CreateUserProfileCommand { UserId = userId };
+
+		// Act
+		var dest = source.Adapt<UserProfile>();
+
+		// Assert
+		Assert.Equal(userId, dest.UserId);
+		Assert.NotNull(dest.Name);
+		Assert.IsType<Name>(dest.Name);
+		Assert.Equal(0, dest.NameId); // Default value for long
+		Assert.Null(dest.ProfilePictureUrl);
+		Assert.Null(dest.SignatureScanUrl);
+		Assert.Equal(DateTime.MinValue, dest.CreatedAt); // Default value for DateTime
+		Assert.Equal(DateTime.MinValue, dest.UpdatedAt); // Default value for DateTime
 	}
 }
