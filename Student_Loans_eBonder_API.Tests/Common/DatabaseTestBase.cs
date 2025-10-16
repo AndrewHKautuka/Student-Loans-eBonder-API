@@ -27,7 +27,7 @@ public abstract class DatabaseTestBase : IAsyncLifetime
 			UserStore = new(_testDBContext);
 		}
 	}
-	protected static Mock<ILogger<T>> MockLogger<T>() where T : class => new Mock<ILogger<T>>();
+	protected static Mock<ILogger<T>> MockLogger<T>() where T : class => new();
 	private UserStore<User, Role, ApplicationDBContext, string> _userStore = null!;
 	protected UserStore<User, Role, ApplicationDBContext, string> UserStore
 	{
