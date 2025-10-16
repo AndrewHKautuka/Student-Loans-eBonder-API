@@ -26,7 +26,7 @@ public partial class UserProfileService(ILogger<UserProfileService> logger, Appl
 		LogCreateNewProfileMessage(logger);
 		var userProfile = command.Adapt<UserProfile>();
 
-		LogCreateNewProfileMessage(logger);
+		LogAddNewProfileMessage(logger);
 		await dBContext.UserProfile.AddAsync(userProfile);
 		await dBContext.SaveChangesAsync();
 
