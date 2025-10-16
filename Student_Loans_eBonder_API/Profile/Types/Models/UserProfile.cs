@@ -13,7 +13,7 @@ public class UserProfile : ITimestampEntity
 	public string UserId { get; set; } = null!;
 	public User User { get; set; } = null!;
 	public long NameId { get; set; }
-	public Name Name { get; set; }
+	public Name Name { get; set; } = null!;
 	public string? ProfilePictureUrl { get; set; }
 	public string? SignatureScanUrl { get; set; }
 	public DateTime CreatedAt { get; set; }
