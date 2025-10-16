@@ -19,6 +19,19 @@
 ## or put your custom commands -------------------
 #echo 'Husky.Net is awesome!'
 
-dotnet format analyzers --no-restore --severity error --verify-no-changes
-dotnet format style --no-restore
-dotnet format whitespace --no-restore
+# Collect staged files (added/copied/modified/renamed), null-delimited for safety with spaces
+staged=()
+while IFS= read -r -d '' f; do
+  case "$f" in
+    *.cs|*.csproj|*.sln) staged+=("$f") ;;
+  esac
+done < <(git diff --cached -z --name-only --diff-filter=ACMR)
+
+# If nothing relevant is staged, exit fast
+if [ ${#staged[@]} -eq 0 ]; then
+  exit 0
+fi
+
+# Run format once against only staged paths (faster than 3 separate subcommands)
+# --verify-no-changes fails the commit if formatting would change files
+dotnet format --no-restore --severity error --verify-no-changes --include "${staged[@]}"
