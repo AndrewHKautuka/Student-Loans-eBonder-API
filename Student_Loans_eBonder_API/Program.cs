@@ -6,6 +6,7 @@ using Student_Loans_eBonder_API.Auth.Types.Models;
 using Student_Loans_eBonder_API.Common;
 using Student_Loans_eBonder_API.Common.Extensions;
 using Student_Loans_eBonder_API.Profile.Services;
+using Student_Loans_eBonder_API.Student.Services;
 
 namespace Student_Loans_eBonder_API;
 
@@ -24,6 +25,7 @@ public static class Program
 		builder.Services.AddScoped<AuthService>();
 		builder.Services.AddScoped<TokenService>();
 		builder.Services.AddScoped<UserProfileService>();
+		builder.Services.AddScoped<StudentService>();
 
 		builder.Services.AddControllers();
 		builder.Services.AddAuthorization();
